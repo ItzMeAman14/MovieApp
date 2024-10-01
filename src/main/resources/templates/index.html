@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin: 20px 0;
+        }
+        .navbar {
+            background-color: #007bff;
+            padding: 10px;
+            display: flex; /* Use flexbox for alignment */
+            justify-content: space-between; /* Space between items */
+            align-items: center; /* Center items vertically */
+            color: white;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+        .navbar form {
+            display: inline-block;
+            margin-left: auto;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .container{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 50px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .movie {
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+            padding: 10px;
+            transition: transform 0.2s;
+        }
+        .movie:hover {
+            transform: scale(1.05);
+        }
+        .movie img {
+            max-width: 100%;
+            border-radius: 5px;
+            height: auto; 
+        }
+        .movie h2 {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .movie p {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/addMovie">Add Movie</a>
+        <form action="/" method="get">
+            <input type="text" name="search" placeholder="Search by title" th:value="${search}" />
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <h1>Movies</h1>
+
+    <div class="container">
+
+        <div class="movie-container" th:each="movie : ${movies}">
+            <div class="movie">
+                <a th:href="@{/movie/{id}(id=${movie.id})}">
+                    <img th:src="${movie.poster}" alt="Movie Poster" />
+                    <h2 th:text="${movie.title}"></h2>
+                    <p th:text="${movie.description}"></p>
+                </a>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
