@@ -10,25 +10,34 @@
             background-color: #f4f4f4;
             margin: 0;
             padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; 
         }
         .movie-details {
             background: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 8px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             padding: 20px;
             max-width: 600px;
-            margin: auto;
+            width: 100%; 
+            text-align: center; 
         }
         .movie-details img {
             max-width: 100%;
-            border-radius: 5px;
+            border-radius: 8px; 
+            height: auto; 
+            margin-bottom: 15px;
         }
         h1 {
-            text-align: center;
             color: #333;
+            margin-bottom: 10px;
         }
         p {
             color: #666;
+            margin: 10px 0; 
+            line-height: 1.5; 
         }
         .back-button {
             display: inline-block;
@@ -40,9 +49,21 @@
             cursor: pointer;
             text-decoration: none;
             margin-top: 20px;
+            transition: background-color 0.3s; 
         }
         .back-button:hover {
             background-color: #0056b3;
+        }
+        @media (max-width: 600px) {
+            .movie-details {
+                padding: 15px; 
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            p {
+                font-size: 0.9em; 
+            }
         }
     </style>
 </head>
@@ -50,7 +71,7 @@
 
     <div class="movie-details">
         <h1 th:text="${movie.title}"></h1>
-        <img th:src="${movie.poster}" alt="Movie Poster" />
+        <img th:src="'/' + ${movie.poster}" alt="Movie Poster" />
         <p th:text="${movie.description}"></p>
         <a class="back-button" href="/">Back to Movies</a>
     </div>

@@ -19,9 +19,9 @@
         .navbar {
             background-color: #007bff;
             padding: 10px;
-            display: flex; /* Use flexbox for alignment */
-            justify-content: space-between; /* Space between items */
-            align-items: center; /* Center items vertically */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             color: white;
         }
         .navbar a {
@@ -50,21 +50,20 @@
         button:hover {
             background-color: #0056b3;
         }
-        .container{
+        .container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 50px;
+            gap: 30px; /* Adjusted gap for better spacing */
             padding: 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
-        
         .movie {
             background: #fff;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             text-align: center;
-            padding: 10px;
+            padding: 15px;
             transition: transform 0.2s;
         }
         .movie:hover {
@@ -72,16 +71,30 @@
         }
         .movie img {
             max-width: 100%;
-            border-radius: 5px;
-            height: auto; 
+            height: auto;
+            border-radius: 8px; /* Slightly larger radius for better aesthetics */
+            object-fit: cover; /* Ensures images cover the area without distortion */
+            max-height: 300px; /* Limits the height for uniformity */
         }
         .movie h2 {
-            font-size: 1.2em;
+            font-size: 1.4em; /* Increased font size for better readability */
             margin: 10px 0;
         }
         .movie p {
             color: #666;
             font-size: 0.9em;
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column; /* Stack items on smaller screens */
+                align-items: flex-start;
+            }
+            .navbar form {
+                margin-top: 10px;
+            }
+            input[type="text"] {
+                width: 100%; /* Full width for the search input on smaller screens */
+            }
         }
     </style>
 </head>
@@ -103,7 +116,7 @@
         <div class="movie-container" th:each="movie : ${movies}">
             <div class="movie">
                 <a th:href="@{/movie/{id}(id=${movie.id})}">
-                    <img th:src="${movie.poster}" alt="Movie Poster" />
+                    <img th:src="'/' + ${movie.poster}" alt="Movie Poster" />
                     <h2 th:text="${movie.title}"></h2>
                     <p th:text="${movie.description}"></p>
                 </a>
